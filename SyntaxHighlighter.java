@@ -61,6 +61,7 @@ public class SyntaxHighlighter extends DefaultStyledDocument {
     }
     
     private void initializeLanguagePatterns() {
+<<<<<<< HEAD
         Pattern commonNumberPattern=Pattern.compile("\\b\\d+(\\.\\d+)?([eE][+-]?\\d+)?\\b");
         Pattern commonSymbolPattern=Pattern.compile("[\\{\\}\\[\\]\\(\\)\\.,;:]");
         Pattern commonOperatorPattern=Pattern.compile("[+\\-*/=<>!&|%^~]+");
@@ -110,6 +111,67 @@ public class SyntaxHighlighter extends DefaultStyledDocument {
         languagePatternsMap.put("Node.js",languagePatternsMap.get("JavaScript"));
         }
         
+=======
+        // Common patterns (numbers and symbols are common across languages)
+        Pattern commonNumberPattern = Pattern.compile("\\b\\d+(\\.\\d+)?([eE][+-]?\\d+)?\\b");
+        Pattern commonSymbolPattern = Pattern.compile("[\\{\\}\\[\\]\\(\\)\\.,;:]");
+        Pattern commonOperatorPattern = Pattern.compile("[+\\-*/=<>!&|%^~]+");
+        
+        // Java
+        String javaKeywords = "\\b(abstract|assert|boolean|break|byte|case|catch|char|class|const|continue|default|" +
+                "do|double|else|enum|extends|final|finally|float|for|goto|if|implements|import|" +
+                "instanceof|int|interface|long|native|new|package|private|protected|public|" +
+                "return|short|static|strictfp|super|switch|synchronized|this|throw|throws|" +
+                "transient|try|void|volatile|while|true|false|null|var|yield|record|sealed|permits|non-sealed)\\b";
+        Pattern javaKeywordPattern = Pattern.compile(javaKeywords);
+        Pattern javaStringPattern = Pattern.compile("\"([^\"\\\\]|\\\\.)*\"|'([^'\\\\]|\\\\.)*'");
+        Pattern javaCommentPattern = Pattern.compile("//.*|/\\*[\\s\\S]*?\\*/");
+        languagePatternsMap.put("Java", new LanguagePatterns(
+                javaKeywordPattern, javaStringPattern, javaCommentPattern,
+                commonNumberPattern, commonSymbolPattern, commonOperatorPattern
+        ));
+        
+        // Python
+        String pythonKeywords = "\\b(False|None|True|and|as|assert|async|await|break|class|continue|def|del|elif|" +
+                "else|except|finally|for|from|global|if|import|in|is|lambda|nonlocal|not|or|pass|" +
+                "raise|return|try|while|with|yield|match|case)\\b";
+        Pattern pythonKeywordPattern = Pattern.compile(pythonKeywords);
+        Pattern pythonStringPattern = Pattern.compile("\"([^\"\\\\]|\\\\.)*\"|'([^'\\\\]|\\\\.)*'|\"\"\"[\\s\\S]*?\"\"\"|'''[\\s\\S]*?'''");
+        Pattern pythonCommentPattern = Pattern.compile("#.*");
+        languagePatternsMap.put("Python", new LanguagePatterns(
+                pythonKeywordPattern, pythonStringPattern, pythonCommentPattern,
+                commonNumberPattern, commonSymbolPattern, commonOperatorPattern
+        ));
+        
+        // C/C++
+        String cppKeywords = "\\b(auto|break|case|char|const|continue|default|do|double|else|enum|extern|float|" +
+                "for|goto|if|inline|int|long|register|restrict|return|short|signed|sizeof|static|struct|switch|typedef|" +
+                "union|unsigned|void|volatile|while|_Alignas|_Alignof|_Atomic|_Bool|_Complex|_Generic|_Imaginary|_Noreturn|" +
+                "_Static_assert|_Thread_local|namespace|class|public|private|protected|new|delete|this|template|typename|" +
+                "virtual|override|friend|operator|mutable|explicit|constexpr|nullptr|using|try|catch|throw)\\b";
+        Pattern cppKeywordPattern = Pattern.compile(cppKeywords);
+        Pattern cppStringPattern = Pattern.compile("\"([^\"\\\\]|\\\\.)*\"|'([^'\\\\]|\\\\.)*'");
+        Pattern cppCommentPattern = Pattern.compile("//.*|/\\*[\\s\\S]*?\\*/");
+        languagePatternsMap.put("C++", new LanguagePatterns(
+                cppKeywordPattern, cppStringPattern, cppCommentPattern,
+                commonNumberPattern, commonSymbolPattern, commonOperatorPattern
+        ));
+        languagePatternsMap.put("C", languagePatternsMap.get("C++"));
+        
+        // JavaScript/Node.js
+        String jsKeywords = "\\b(await|break|case|catch|class|const|continue|debugger|default|delete|do|" +
+                "else|enum|export|extends|false|finally|for|function|if|import|in|instanceof|let|new|null|" +
+                "return|super|switch|this|throw|true|try|typeof|var|void|while|with|yield)\\b";
+        Pattern jsKeywordPattern = Pattern.compile(jsKeywords);
+        Pattern jsStringPattern = Pattern.compile("\"([^\"\\\\]|\\\\.)*\"|'([^'\\\\]|\\\\.)*'|`([^`\\\\]|\\\\.)*`");
+        Pattern jsCommentPattern = Pattern.compile("//.*|/\\*[\\s\\S]*?\\*/");
+        languagePatternsMap.put("JavaScript", new LanguagePatterns(
+                jsKeywordPattern, jsStringPattern, jsCommentPattern,
+                commonNumberPattern, commonSymbolPattern, commonOperatorPattern
+        ));
+        languagePatternsMap.put("Node.js", languagePatternsMap.get("JavaScript"));
+    }
+>>>>>>> 075c35528cb881a3537536e5403360b67ee83f2e
     
     public void setLanguage(String language) {
         if (languagePatternsMap.containsKey(language)) {

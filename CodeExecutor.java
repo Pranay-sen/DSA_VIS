@@ -47,7 +47,11 @@ public class CodeExecutor {
             }
             
             // Look for method definitions
+<<<<<<< HEAD
             if (line.contains("public") || line.contains("private") || line.contains("protected") || line.contains("default")) {
+=======
+            if (line.contains("public") || line.contains("private") || line.contains("protected")) {
+>>>>>>> 075c35528cb881a3537536e5403360b67ee83f2e
                 if (line.contains("(") && line.contains(")") && !line.contains(";")) {
                     // Extract method name
                     Pattern methodPattern = Pattern.compile("(public|private|protected)\\s+\\w+\\s+(\\w+)\\s*\\(");
